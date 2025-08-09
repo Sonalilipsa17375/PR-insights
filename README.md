@@ -4,6 +4,14 @@ CLI tool to analyze GitHub pull requests with ease
 
 `NOTICE: Current development has been shifted to PYTHON-NEW and NODEJS-New directories. Kindly use them for future and present purposes.`
 
+# Installation and Program Files
+
+| Backend | File                        |
+|---------|-----------------------------|
+| Nodejs  | `/NODEJS-NEW/pr_monitor.js` |
+| Python  | `/PYTHON-NEW/pr_monitor.py` |
+| oclif   | `/bin/dev.js`               |
+
 # Usage Commands
 ```sh-session
 $ prinsights check --owner=sonali --repo=Hello-World --pr=38

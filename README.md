@@ -1,32 +1,28 @@
 prinsights
 =================
+CLI tool to analyze GitHub pull requests with ease
 
-CLI tool to analyze GitHub pull requests for observability issues
+`NOTICE: Current development has been shifted to PYTHON-NEW and NODEJS-New directories. Kindly use them for future and present purposes.`
 
-
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/prinsights.svg)](https://npmjs.org/package/prinsights)
-[![Downloads/week](https://img.shields.io/npm/dw/prinsights.svg)](https://npmjs.org/package/prinsights)
-
-
-<!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
-# Usage
-<!-- usage -->
+# Python Usage Example
 ```sh-session
-$ npm install -g mycli123
-$ mycli123 COMMAND
-running command...
-$ mycli123 (--version)
-mycli123/0.0.0 darwin-arm64 node-v20.12.2
-$ mycli123 --help [COMMAND]
-USAGE
-  $ mycli123 COMMAND
-...
+$ python pr_monitor.py <Organisation> <Repo>
+#5 Adding TUI support by user1
+#2 Adding Best CLI by user2
+#1 Initial commit by user1
+
+$ python pr_monitor.py <Organisation> <Repo> --state closed
+#4 Add odlif support by user2
+#3 Update fetch functions by user2
+
+$ python pr_monitor.py <Organisation> <Repo> --pr 1
+PR #1: Initial commit
+Author: user1
+State: open
+Created at: 2015-10-17T00:22:03Z
+URL: https://github.com/<Organisation>/<Repo>/pull/1
+Body: Add the changes for intial start commit.
 ```
-<!-- usagestop -->
 # Commands
 <!-- commands -->
 * [`mycli123 hello PERSON`](#mycli123-hello-person)

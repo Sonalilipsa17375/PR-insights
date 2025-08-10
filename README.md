@@ -1,41 +1,162 @@
-prinsights
-=================
-CLI tool to analyze GitHub pull requests with ease
 
-`NOTICE: Current development has been shifted to PYTHON-NEW and NODEJS-New directories. Kindly use them for future and present purposes.`
+---
 
-# Installation and Program Files
+# 📦 GitHub Pull Request Insights
 
-| Backend | File                        |
-|---------|-----------------------------|
-| Nodejs  | `/NODEJS-NEW/pr_monitor.js` |
-| Python  | `/PYTHON-NEW/pr_monitor.py` |
-| oclif   | `/bin/dev.js`               |
+A Node.js tool for **monitoring and reviewing GitHub Pull Requests**:
 
-# Usage Commands
-```sh-session
-$ prinsights check --owner=sonali --repo=Hello-World --pr=38
+1. **CLI mode** (`pr_monitor.js`) — Quick terminal output for PR lists or detailed PR information.
+2. **TUI mode** (`pr_tui.js`) — Interactive split-pane terminal interface using `blessed` for browsing PRs and their details.
+
+---
+
+## ✨ Features
+
+### **CLI (`pr_monitor.js`)**
+
+* List PRs for a repository (`open`, `closed`, or `all`).
+* View details of a single PR, including:
+
+  * Title, author, state, creation date
+  * Description/body text
+  * Issue comments (general discussion)
+  * Review comments (file-specific)
+
+### **TUI (`pr_tui.js`)**
+
+* Interactive list of PRs in the left pane.
+* Scrollable PR details in the right pane.
+* Keyboard navigation:
+
+  * `Tab` → Switch focus between panes
+  * `q` / `Ctrl+C` → Quit
+  * `Esc` → Back to list from details view
+
+---
+
+## 🛠 Installation
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/yourusername/github-pr-insights.git
+cd github-pr-insights
 ```
 
-# Python Usage Example
-```sh-session
-$ python pr_monitor.py <Organisation> <Repo>
-#5 Adding TUI support by user1
-#2 Adding Best CLI by user2
-#1 Initial commit by user1
+2. **Install dependencies**
 
-$ python pr_monitor.py <Organisation> <Repo> --state closed
-#4 Add odlif support by user2
-#3 Update fetch functions by user2
-
-$ python pr_monitor.py <Organisation> <Repo> --pr 1
-PR #1: Initial commit
-Author: user1
-State: open
-Created at: 2015-10-17T00:22:03Z
-URL: https://github.com/<Organisation>/<Repo>/pull/1
-Body: Add the changes for intial start commit.
+```bash
+npm install node-fetch blessed
 ```
 
-# Contributor
-Sonali Lipsa Patra (@Sonalilipsa17375)
+---
+
+## 🔑 Authentication
+
+You need a **GitHub Personal Access Token** (PAT) to use the GitHub API.
+Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens) with the `repo` scope.
+
+Set it in your environment:
+
+```bash
+export GH_TOKEN=your_token_here
+```
+
+Or pass it directly as a CLI argument (TUI mode).
+
+---
+
+## 🚀 Usage
+
+### **CLI Mode**
+
+```bash
+# List open PRs
+node pr_monitor.js <owner> <repo>
+
+# List closed PRs
+node pr_monitor.js <owner> <repo> --state closed
+
+# Show details for PR #42
+node pr_monitor.js <owner> <repo> --pr 42
+```
+
+**Example:**
+
+```bash
+node pr_monitor.js octocat Hello-World --state all
+```
+
+---
+
+### **TUI Mode**
+
+```bash
+node pr_tui.js <owner> <repo> [token]
+```
+
+**Example:**
+
+```bash
+node pr_tui.js octocat Hello-World
+```
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├── pr_monitor.js   # CLI script for PR listing/details
+├── pr_tui.js       # Interactive TUI script
+└── README.md       # Project documentation
+```
+
+---
+
+## 📜 Functionality Overview
+
+### **pr\_monitor.js**
+
+* `getHeaders()` → Builds API request headers with token.
+* `fetchPullRequests()` → Retrieves list of PRs.
+* `fetchPullRequest()` → Retrieves details of a specific PR.
+* `fetchIssueComments()` → Retrieves general discussion comments.
+* `fetchReviewComments()` → Retrieves file-specific review comments.
+* `printPRList()` → Displays a short list of PRs.
+* `printPRDetails()` → Displays detailed PR info with comments.
+
+### **pr\_tui.js**
+
+* `getToken()` → Reads token from env or CLI arg.
+* `getArgs()` → Parses CLI arguments for owner/repo/token.
+* `fetchPRs()` → Retrieves PR list.
+* `fetchPRDetails()` → Retrieves PR details + comments in parallel.
+* `prDetails()` → Formats PR data into readable text lines for UI.
+* `main()` → Builds TUI layout and handles user interaction.
+
+---
+
+## ⚡ Keyboard Shortcuts (TUI)
+
+| Key            | Action                                   |
+| -------------- | ---------------------------------------- |
+| `Tab`          | Switch focus between PR list and details |
+| `q` / `Ctrl+C` | Quit application                         |
+| `Esc`          | Return to PR list from details view      |
+
+---
+
+## 📌 Notes
+
+* Avoid hardcoding tokens — use environment variables for security.
+* The GitHub API is paginated — currently, only up to 100 PRs (CLI) / 50 PRs (TUI) are fetched at once.
+* For private repos, your token must have appropriate permissions.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
